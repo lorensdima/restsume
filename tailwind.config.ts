@@ -8,6 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "slower-spin": "slower-spin 80s linear infinite",
+      },
+      keyframes: {
+        "slower-spin": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
