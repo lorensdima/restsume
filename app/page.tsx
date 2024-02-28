@@ -55,7 +55,7 @@ export default function Home() {
               alt="circle"
             />
           </div>
-          <div className="relative z-20 p-8 rounded-lg shadow-lg">
+          <div className="relative z-20 rounded-lg shadow-lg w-full">
             <p
               className={`${outfit.className} antialiased text-6xl text-center font-bold bg-black`}
             >
@@ -185,7 +185,10 @@ export default function Home() {
           <div className="flex gap-2 items-center absolute right-0 mr-3">
             <LinkIcon className="h-5 w-5" />
             <a href="https://www.vecteezy.com/free-vector/dot-grid">
-              Dot Grid Vectors by Vecteezy
+              <p className="flex">
+                Dot Grid{` `}
+                <div className="md:block hidden"> Vectors by Vecteezy </div>
+              </p>
             </a>
           </div>
         </div>
