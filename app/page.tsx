@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="">
       {/*<Starfield /> */}
-
+      <Starfield />
       <div className="min-h-screen">
         <div className="relative flex items-center justify-center">
           <div className="bg-zinc-800 p-3 flex gap-3">
