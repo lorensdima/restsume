@@ -5,8 +5,10 @@ import { CodeBracketIcon } from "@heroicons/react/20/solid";
 export default function Skills() {
   return (
     <>
-      <div className="flex flex-col items-center gap-5 z-10 mr-20 lg:mr-0">
-        <p className={`${jost.className} text-center text-gray-200 mt-2`}>
+      <div className="flex flex-col items-center gap-5 z-10">
+        <p
+          className={`${jost.className} text-center text-lg text-gray-200 my-2`}
+        >
           Technologies I'm <u>comfortable</u> with.
         </p>
         <div className="flex gap-5">
@@ -124,7 +126,7 @@ export default function Skills() {
           </div>
         </div>
       </div>
-      <div className="absolute right-[-8.5rem]">
+      <div className="absolute right-[-8.5rem] hidden md:block">
         <div className="flex gap-5 transform rotate-90 border w-96 p-3 items-center">
           <CodeBracketIcon className="h-7 w-7 text-white text-center" />
           <p
