@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { outfit, jost, atkinson, inconsolata, into_light } from "./ui/fonts";
 import Starfield from "react-starfield";
+import { Suspense } from "react";
 import {
   RectangleStackIcon,
   EnvelopeIcon,
@@ -69,9 +70,10 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:ml-56" id="projects">
-          <Projects />
+          <Suspense>
+            <Projects />
+          </Suspense>
         </div>
-        {/* end of projects */}
         <div className="flex items-center h-[40rem] mt-10 relative justify-center border-b-4 border-t-4">
           <div className="bg-black w-full h-full absolute" />
           <Image
@@ -83,8 +85,6 @@ export default function Home() {
               objectFit: "cover",
             }}
           />
-
-          {/* <a href="https://www.vecteezy.com/free-vector/dot-grid">Dot Grid Vectors by Vecteezy</a> */}
           <Skills />
         </div>
       </div>
