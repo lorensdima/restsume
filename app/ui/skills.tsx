@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { outfit, jost, atkinson, inconsolata } from "./fonts";
+import { jost, atkinson } from "./fonts";
 import { CodeBracketIcon } from "@heroicons/react/20/solid";
 
 export default function Skills() {
   return (
     <>
-      <div className="flex flex-col items-center gap-5 z-10 ">
+      <div className="flex flex-col items-center gap-5 z-10 mr-20 lg:mr-0">
+        <p className={`${jost.className} text-center text-gray-200 mt-2`}>
+          Technologies I'm <u>comfortable</u> with.
+        </p>
         <div className="flex gap-5">
           <div className="flex-col flex items-center p-3 border rounded-sm">
             <Image
@@ -46,8 +49,6 @@ export default function Skills() {
               Node
             </p>
           </div>
-        </div>
-        <div className="flex gap-5">
           <div className="flex-col flex items-center p-3 border rounded-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +66,8 @@ export default function Skills() {
               React
             </p>
           </div>
+        </div>
+        <div className="flex gap-5">
           <div className="flex-col flex items-center p-3 border rounded-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +85,17 @@ export default function Skills() {
               Express
             </p>
           </div>
+          <div className="flex-col flex items-center p-3 border rounded-sm px-5">
+            <Image
+              src="/git.svg"
+              width={100}
+              height={100}
+              alt="js logo"
+              color="white"
+              className="dark:invert h-10 w-10 max-xs:w-5"
+            />
+            <p className={`${jost.className} text-center text-2xl mt-2`}>Git</p>
+          </div>
           <div className="flex-col flex items-center p-3 border rounded-sm">
             <Image
               src="/oracle.svg"
@@ -93,6 +107,19 @@ export default function Skills() {
             />
             <p className={`${jost.className} text-center text-2xl mt-2`}>
               Oracle
+            </p>
+          </div>
+          <div className="flex-col flex items-center p-3 border rounded-sm">
+            <Image
+              src="/mysql.svg"
+              width={100}
+              height={100}
+              alt="js logo"
+              color="white"
+              className="dark:invert h-10 w-10 max-xs:w-5"
+            />
+            <p className={`${jost.className} text-center text-2xl mt-2`}>
+              MySql
             </p>
           </div>
         </div>

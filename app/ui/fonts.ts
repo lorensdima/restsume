@@ -4,7 +4,7 @@ import {
   Inter,
   Jost,
   Outfit,
-  Shadows_Into_Light_Two,
+  Shadows_Into_Light,
 } from "next/font/google";
 
 export const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +20,7 @@ export const atkinson = Atkinson_Hyperlegible({
   weight: "400",
 });
 
-export const shadows_font = Shadows_Into_Light_Two({
+export const into_light = Shadows_Into_Light({
   subsets: ["latin"],
   weight: "400",
 });
