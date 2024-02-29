@@ -28,7 +28,7 @@ export default function Skills() {
               src="/python.svg"
               width={100}
               height={100}
-              alt="js logo"
+              alt="python logo"
               color="white"
               className="h-10 w-10 max-xs:w-5"
             />
@@ -41,7 +41,7 @@ export default function Skills() {
               src="/node-js.svg"
               width={100}
               height={100}
-              alt="js logo"
+              alt="node logo"
               color="white"
               className="dark:invert h-10 w-10 max-xs:w-5"
             />
@@ -90,7 +90,7 @@ export default function Skills() {
               src="/git.svg"
               width={100}
               height={100}
-              alt="js logo"
+              alt="git logo"
               color="white"
               className="dark:invert h-10 w-10 max-xs:w-5"
             />
@@ -101,7 +101,7 @@ export default function Skills() {
               src="/oracle.svg"
               width={100}
               height={100}
-              alt="js logo"
+              alt="oracle logo"
               color="white"
               className="dark:invert h-10 w-10 max-xs:w-5"
             />
@@ -114,7 +114,7 @@ export default function Skills() {
               src="/mysql.svg"
               width={100}
               height={100}
-              alt="js logo"
+              alt="mysql logo"
               color="white"
               className="dark:invert h-10 w-10 max-xs:w-5"
             />

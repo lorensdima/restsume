@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { StopCircleIcon } from "@heroicons/react/24/outline";
 import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 //AG Florendo Inventory and Sales Monitoring System (AGISS)
 interface CardProps {
@@ -119,17 +120,19 @@ export default function Projects() {
             PR0JECTS
           </p>
         </div>
-        <Link href={createPageURL(currentPage + 1)} scroll={false}>
-          {currentPage == 1 ? (
-            <div className="flex items-center text-md">
-              <ChevronRightIcon className="h-10 w-10 text-white " />
-            </div>
-          ) : (
-            <div className="flex items-center text-md">
-              <ChevronLeftIcon className="h-10 w-10 text-white " />
-            </div>
-          )}
-        </Link>
+        <Suspense>
+          <Link href={createPageURL(currentPage + 1)} scroll={false}>
+            {currentPage == 1 ? (
+              <div className="flex items-center text-md">
+                <ChevronRightIcon className="h-10 w-10 text-white " />
+              </div>
+            ) : (
+              <div className="flex items-center text-md">
+                <ChevronLeftIcon className="h-10 w-10 text-white " />
+              </div>
+            )}
+          </Link>
+        </Suspense>
       </div>
       <div className="mt-4 flex flex-col gap-5 p-5">
         {currentPage == 1 ? (
@@ -196,35 +199,37 @@ export default function Projects() {
       </div>
       <div className="">
         <div className="flex">
-          {currentPage == 1 ? (
-            <>
-              <MinusCircleIcon className="h-10 w-10 text-white" />
-              <StopCircleIcon className="h-10 w-10 text-white" />
-            </>
-          ) : (
-            <>
-              <StopCircleIcon className="h-10 w-10 text-white" />
-              <MinusCircleIcon className="h-10 w-10 text-white" />
-            </>
-          )}
-
-          <Link
-            className="ml-3"
-            href={createPageURL(currentPage + 1)}
-            scroll={false}
-          >
+          <Suspense>
             {currentPage == 1 ? (
-              <div className="flex items-center text-md">
-                Next
-                <ChevronRightIcon className="h-10 w-10 text-white " />
-              </div>
+              <>
+                <MinusCircleIcon className="h-10 w-10 text-white" />
+                <StopCircleIcon className="h-10 w-10 text-white" />
+              </>
             ) : (
-              <div className="flex items-center text-md">
-                Previous
-                <ChevronLeftIcon className="h-10 w-10 text-white " />
-              </div>
+              <>
+                <StopCircleIcon className="h-10 w-10 text-white" />
+                <MinusCircleIcon className="h-10 w-10 text-white" />
+              </>
             )}
-          </Link>
+
+            <Link
+              className="ml-3"
+              href={createPageURL(currentPage + 1)}
+              scroll={false}
+            >
+              {currentPage == 1 ? (
+                <div className="flex items-center text-md">
+                  Next
+                  <ChevronRightIcon className="h-10 w-10 text-white " />
+                </div>
+              ) : (
+                <div className="flex items-center text-md">
+                  Previous
+                  <ChevronLeftIcon className="h-10 w-10 text-white " />
+                </div>
+              )}
+            </Link>
+          </Suspense>
         </div>
       </div>
     </>
