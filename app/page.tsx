@@ -69,7 +69,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="lg:ml-56" id="projects">
+        <div className="lg:ml-56 mb-20" id="projects">
           <Suspense>
             <Projects />
           </Suspense>

@@ -130,7 +130,7 @@ export default function Projects() {
           )}
         </Link>
       </div>
-      <div className="mt-4 flex flex-col gap-5 p-5">
+      <div className="mt-4 grid gap-4 lg:grid-cols-2 grid-cols-1 gap-5 p-5">
         {currentPage == 1 ? (
           <>
             {" "}
