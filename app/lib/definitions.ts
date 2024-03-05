@@ -7,7 +7,7 @@ export type User = {
 
 export type Help = {
   name: string;
-  route: string;
+  endpoint: string;
   description: string;
 };
 

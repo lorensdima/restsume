@@ -18,7 +18,7 @@ export async function fetchUsers() {
 export async function fetchHelp() {
   try {
     const data = await sql<Help>`
-        SELECT name, route, description FROM help
+        SELECT name, '/api' || route AS endpoint, description FROM help
       `;
 
     const help = data.rows;

@@ -11,6 +11,7 @@ import {
 
 import Skills from "./ui/skills";
 import Projects from "./ui/projects";
+import HeroInfoCard from "./ui/hero_info_card";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       {/*<Starfield /> */}
       <Starfield />
       <div className="min-h-screen">
+        <HeroInfoCard />
         <div className="relative flex items-center justify-center">
           <div className="bg-zinc-800 p-3 flex gap-3">
             <a

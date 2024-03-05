@@ -42,7 +42,7 @@ export default function Projects() {
               className="rounded-lg text-shadow-md shadow-lg"
             />
           </div>
-          <div className="lg:w-1/2 md:w-full p-1">
+          <div className="lg:w-1/2 md:w-full">
             <h1
               className={`${jost.className} text-center text-lg mb-5 font-bold text-shadow-md`}
             >
@@ -110,7 +110,7 @@ export default function Projects() {
   return (
     <>
       <div className="z-10 ml-50 text-sm flex items-center">
-        <div className="mx-5 border rounded-full p-3">
+        <div className="mx-5 border-2 rounded-full p-3">
           <RectangleStackIcon className="h-7 w-7 text-white " />
         </div>
         <div className="flex w-auto p-3 justify-center bg-zinc-600 mr-3">
