@@ -32,7 +32,7 @@ export default function Projects() {
   }) => {
     return (
       <div className="p-5 border rounded-lg bg-zinc-800 max-w-[75rem]">
-        <div className="flex flex-col md:flex-row gap-5 items-center">
+        <div className="flex flex-col gap-5 items-center">
           <div className="">
             <Image
               src={image_src}
@@ -42,7 +42,7 @@ export default function Projects() {
               className="rounded-lg text-shadow-md shadow-lg"
             />
           </div>
-          <div className="lg:w-1/2 md:w-full">
+          <div className=" items-center">
             <h1
               className={`${jost.className} text-center text-lg mb-5 font-bold text-shadow-md`}
             >
@@ -53,12 +53,12 @@ export default function Projects() {
             >
               {description}
             </p>
-            <div className="mt-5 flex gap-5">
+            <div className="mt-5 grid lg:grid-cols-2 grid-cols-1 text-center text-sm gap-5">
               <a target="_blank" rel="noopener noreferrer" href={repo_url}>
                 <div
                   className={`${inconsolata.className} cursor-pointer p-4 border border-blue-300 rounded-lg hover:animate-pulse hover:bg-blue-200 hover:text-black hover:border-black`}
                 >
-                  View Repository
+                  View Repo
                 </div>
               </a>
               {documentation_url ? (
@@ -70,7 +70,7 @@ export default function Projects() {
                   <div
                     className={`${inconsolata.className} cursor-pointer p-4 border border-blue-300 rounded-lg hover:animate-pulse hover:bg-blue-200 hover:text-black hover:border-black`}
                   >
-                    View Documentation
+                    View Doc
                   </div>
                 </a>
               ) : (
@@ -79,9 +79,9 @@ export default function Projects() {
               {site_url ? (
                 <a target="_blank" rel="noopener noreferrer" href={site_url}>
                   <div
-                    className={`${inconsolata.className} cursor-pointer p-4 border border-green-300 rounded-lg bg-green-600 hover:animate-pulse hover:bg-blue-200 hover:text-black hover:border-black`}
+                    className={`${inconsolata.className} cursor-pointer p-4 border border-green-300 rounded-lg bg-green-600 hover:animate-pulse hover:bg-green-200 hover:text-black hover:border-black`}
                   >
-                    View Site
+                    Visit Site
                   </div>
                 </a>
               ) : (
@@ -130,7 +130,7 @@ export default function Projects() {
           )}
         </Link>
       </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-2 grid-cols-1 gap-5 p-5">
+      <div className="mt-4 grid lg:grid-cols-2 grid-cols-1 gap-4 p-5">
         {currentPage == 1 ? (
           <>
             {" "}

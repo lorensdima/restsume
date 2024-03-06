@@ -1,5 +1,7 @@
+"use server";
+
 import { sql } from "@vercel/postgres";
-import { Education, Experience, Help, Project, User } from "./definitions";
+import { Dog, Education, Experience, Help, Project, User } from "./definitions";
 
 export async function fetchUsers() {
   try {
@@ -105,5 +107,19 @@ export async function fetchExperience() {
   } catch (err) {
     console.error("Database Error:", err);
     throw new Error("Failed to fetch experiences.");
+  }
+}
+
+export async function fetchPetNum() {
+  try {
+    const data = await sql<Dog>`
+    SELECT * 
+    FROM dog
+    WHERE name = 'Skippy Mae'
+    `;
+    return data.rows;
+  } catch (err) {
+    console.error("Database Error:", err);
+    throw new Error("Failed to get number of times peted");
   }
 }

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { outfit, jost, atkinson, inconsolata, into_light } from "./ui/fonts";
+import { outfit, jost, into_light } from "./ui/fonts";
 import Starfield from "react-starfield";
 import { Suspense } from "react";
 import {
@@ -12,6 +12,7 @@ import {
 import Skills from "./ui/skills";
 import Projects from "./ui/projects";
 import HeroInfoCard from "./ui/hero_info_card";
+import PetModal from "./ui/pet_model";
 
 export default function Home() {
   return (
@@ -90,6 +91,7 @@ export default function Home() {
           <Skills />
         </div>
       </div>
+      <PetModal />
       <div className="flex flex-col items-center my-96 mt-0 relative justify-center">
         <Image
           className="dark:invert"

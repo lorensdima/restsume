@@ -34,3 +34,8 @@ export type Education = {
   start_date: string;
   end_date: string;
 };
+
+export type Dog = {
+  name: string;
+  pets: number;
+};

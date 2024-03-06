@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       animation: {
         "slower-spin": "slower-spin 80s linear infinite",
+        "fast-rotate-animation": "rotate 0.2s ease-in-out alternate infinite",
+        "rotate-animation": "rotate 0.6s ease-in-out alternate infinite",
+        "slow-rotate-animation": "rotate 1s ease-in-out alternate infinite",
       },
       keyframes: {
         "slower-spin": {
@@ -18,6 +21,14 @@ const config: Config = {
           },
           "100%": {
             transform: "rotate(360deg)",
+          },
+        },
+        rotate: {
+          "0%": {
+            transform: "rotate(-90deg)",
+          },
+          "100%": {
+            transform: "rotate(90deg)",
           },
         },
       },
