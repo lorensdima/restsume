@@ -105,7 +105,7 @@ export default function Projects() {
     }
     const params = new URLSearchParams(searchParams);
     params.set("page", pageNumber.toString());
-    return `${pathname}?${params.toString()}`;
+    return `${pathname}?${params.toString()}#projects`;
   };
   return (
     <>
@@ -207,11 +207,7 @@ export default function Projects() {
             </>
           )}
 
-          <Link
-            className="ml-3"
-            href={createPageURL(currentPage + 1)}
-            scroll={false}
-          >
+          <Link className="ml-3" href={createPageURL(currentPage + 1)}>
             {currentPage == 1 ? (
               <div className="flex items-center text-md">
                 Next
