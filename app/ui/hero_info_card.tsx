@@ -6,7 +6,7 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { outfit } from "./fonts";
+import { workSans } from "./fonts";
 import { useState } from "react";
 
 export default function HeroInfoCard() {
@@ -20,26 +20,29 @@ export default function HeroInfoCard() {
     <div
       className={`${
         visible ? "" : "-translate-x-16"
-      } absolute top-3 left-3 z-20`}
+      } fixed top-20 left-6 z-50 transition-transform duration-300`}
     >
-      <div className="w-1/2 flex items-center gap-2 ">
-        <div className="h-full border-r-2 pr-1">
-          <ExclamationCircleIcon className="w-12" />
+      <div className="flex items-center gap-2">
+        <div className="h-full border-r-2 border-black pr-2">
+          <ExclamationCircleIcon className="w-8 h-8 text-black" />
         </div>
         {visible && (
-          <div className={`${outfit.className} text-shadow-md bg-zinc-600 p-2`}>
-            This a RESTsume. Try accessing{" "}
-            <Link href="/api" className="font-bold">
+          <div className={`${workSans.className} text-sm bg-off-white border-2 border-black p-3 shadow-lg`}>
+            This is a RESTsume. Try accessing{" "}
+            <Link href="/api" className="font-bold text-accent-orange hover:underline">
               /api
             </Link>{" "}
             to see available routes!
           </div>
         )}
         {visible ? (
-          <XMarkIcon className="h-20 w-20 cursor-pointer" onClick={toggle} />
+          <XMarkIcon 
+            className="h-8 w-8 cursor-pointer text-black hover:text-accent-orange transition-colors" 
+            onClick={toggle} 
+          />
         ) : (
           <ArrowRightIcon
-            className="h-24 w-24 cursor-pointer"
+            className="h-8 w-8 cursor-pointer text-black hover:text-accent-orange transition-colors"
             onClick={toggle}
           />
         )}

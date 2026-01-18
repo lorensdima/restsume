@@ -27,7 +27,9 @@ export async function fetchHelp() {
     return help;
   } catch (err) {
     console.error("Database Error:", err);
-    throw new Error("Failed to fetch all help data.");
+    // Return empty array instead of throwing to prevent app crash
+    // This allows the API page to still render even if database is unavailable
+    return [];
   }
 }
 

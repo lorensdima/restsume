@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-
-const inter = Inter({ subsets: ["latin"] });
+import { bebas, workSans } from "./ui/fonts";
 
 export const metadata: Metadata = {
   title: "Emilio Laurence Dimalanta",
-  description: "Porfolio",
+  description: "Portfolio",
 };
 
 export default function RootLayout({
@@ -17,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${bebas.variable} ${workSans.variable} ${workSans.className}`}>
         {children}
         <Analytics />
       </body>
