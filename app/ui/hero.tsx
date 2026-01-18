@@ -162,7 +162,7 @@ export default function Hero() {
                 {/* Signature text */}
                 <div className="absolute top-8 left-8 z-20">
                   <p className={`${workSans.className} text-white text-sm font-light italic opacity-90`}>
-                    Emilio Laurence
+                    Laurence Dimalanta
                   </p>
                 </div>
 
@@ -175,7 +175,7 @@ export default function Hero() {
                 <div className="relative w-full h-full mt-8 rounded-2xl overflow-hidden">
                   <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                     <Image
-                      src="https://placehold.co/600x800/FF6B35/FFFFFF?text=Profile"
+                      src="https://placehold.co/600x800/FF6B35/FFFFFF?text=Emilio"
                       alt="Profile"
                       width={600}
                       height={800}
@@ -184,36 +184,7 @@ export default function Hero() {
                     />
                   </div>
                 </div>
-
-                {/* Small circular overlay images */}
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 z-30 space-y-4">
-                  <div className="w-20 h-20 rounded-full bg-white border-4 border-white overflow-hidden shadow-xl">
-                    <Image
-                      src="https://placehold.co/80x80/000000/FFFFFF?text=1"
-                      alt="Overlay 1"
-                      width={80}
-                      height={80}
-                      className="object-cover w-full h-full"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="w-20 h-20 rounded-full bg-white border-4 border-white overflow-hidden shadow-xl">
-                    <Image
-                      src="https://placehold.co/80x80/000000/FFFFFF?text=2"
-                      alt="Overlay 2"
-                      width={80}
-                      height={80}
-                      className="object-cover w-full h-full"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-
-                {/* Large arrow button */}
-                <div className="absolute bottom-6 right-6 w-16 h-16 bg-white rounded-full flex items-center justify-center z-30 shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer group">
-                  <ArrowUpRightIcon className="w-8 h-8 text-black group-hover:text-accent-orange transition-colors" />
-                </div>
-
+                
                 {/* Decorative corner accent */}
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/5 rounded-tr-full" />
               </div>

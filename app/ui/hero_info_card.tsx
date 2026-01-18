@@ -20,7 +20,7 @@ export default function HeroInfoCard() {
     <div
       className={`${
         visible ? "" : "-translate-x-16"
-      } fixed top-20 left-6 z-50 transition-transform duration-300`}
+      } fixed top-20 left-6 z-50 transition-transform duration-300 mt-3`}
     >
       <div className="flex items-center gap-2">
         <div className="h-full border-r-2 border-black pr-2">

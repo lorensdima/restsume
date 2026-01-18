@@ -130,7 +130,7 @@ export default function About() {
           {/* Description text */}
           <div className={`${workSans.className} text-center space-y-4 max-w-2xl mx-auto`}>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Information Technology graduate passionate about creating innovative solutions 
+              Cloud Software Engineer passionate about creating innovative solutions 
               through code. Specializing in full-stack development with a focus on user 
               experience and clean architecture.
             </p>
