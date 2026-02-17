@@ -4,7 +4,6 @@ import About from "./ui/about";
 import Portfolio from "./ui/portfolio";
 import Exhibitions from "./ui/exhibitions";
 import Footer from "./ui/footer";
-import HeroInfoCard from "./ui/hero_info_card";
 import PetModal from "./ui/pet_model";
 import Contact from "./ui/contact";
 
@@ -12,7 +11,6 @@ export default function Home() {
   return (
     <main className="relative">
       <Header />
-      <HeroInfoCard />
       <Hero />
       <About />
       <Portfolio />

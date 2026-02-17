@@ -10,7 +10,7 @@ import { workSans } from "./fonts";
 import { useState } from "react";
 
 export default function HeroInfoCard() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const toggle = () => {
     setVisible(!visible);
@@ -19,8 +19,10 @@ export default function HeroInfoCard() {
   return (
     <div
       className={`${
-        visible ? "" : "-translate-x-16"
-      } fixed top-20 left-6 z-50 transition-transform duration-300 mt-3`}
+        visible
+          ? "transition-transform duration-300"
+          : "animate-subtle-bounce transition-transform duration-300"
+      } absolute top-20 left-6 z-50 mt-3`}
     >
       <div className="flex items-center gap-2">
         <div className="h-full border-r-2 border-black pr-2">

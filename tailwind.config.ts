@@ -27,8 +27,13 @@ const config: Config = {
         "fade-in-up-delay-2": "fadeInUp 0.6s ease-out 0.2s forwards",
         "fade-in-up-delay-3": "fadeInUp 0.6s ease-out 0.3s forwards",
         "fade-in-up-delay-4": "fadeInUp 0.6s ease-out 0.4s forwards",
+        "subtle-bounce": "subtle-bounce 2.5s ease-in-out infinite",
       },
       keyframes: {
+        "subtle-bounce": {
+          "0%, 100%": { transform: "translateX(-4rem)" },
+          "50%": { transform: "translateX(-3.5rem)" },
+        },
         "slower-spin": {
           "0%": {
             transform: "rotate(0deg)",

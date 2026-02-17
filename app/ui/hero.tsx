@@ -4,6 +4,7 @@ import Image from "next/image";
 import { bebas, workSans } from "./fonts";
 import { GlobeAltIcon, ArrowUpRightIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
+import HeroInfoCard from "./hero_info_card";
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -44,6 +45,8 @@ export default function Hero() {
           background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 107, 53, 0.15), transparent 50%)`,
         }}
       />
+
+      <HeroInfoCard />
 
       {/* Decorative geometric shapes */}
       <div className="absolute top-20 right-10 w-32 h-32 border-2 border-black/10 rotate-45 hidden lg:block" />
