@@ -1,200 +1,182 @@
 "use client";
 
-import Image from "next/image";
-import { bebas, workSans } from "./fonts";
-import { GlobeAltIcon, ArrowUpRightIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
-import HeroInfoCard from "./hero_info_card";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { EnvelopeIcon } from "@heroicons/react/20/solid";
+import { outfit, inconsolata } from "./fonts";
+import OrbitRing from "./orbit_ring";
+import { LinkedInIcon } from "./icons";
+import { socials } from "../lib/content";
 
-export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const heroRef = useRef<HTMLElement>(null);
+function Typed({ text, startDelay = 1400 }: { text: string; startDelay?: number }) {
+  const reduce = useReducedMotion();
+  const [n, setN] = useState(0);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    if (heroRef.current) {
-      heroRef.current.addEventListener("mousemove", handleMouseMove);
+    if (reduce) {
+      setN(text.length);
+      return;
     }
-
+    let id: number | undefined;
+    const start = window.setTimeout(() => {
+      id = window.setInterval(() => {
+        setN((v) => {
+          if (v >= text.length) {
+            window.clearInterval(id);
+            return v;
+          }
+          return v + 1;
+        });
+      }, 38);
+    }, startDelay);
     return () => {
-      if (heroRef.current) {
-        heroRef.current.removeEventListener("mousemove", handleMouseMove);
-      }
+      window.clearTimeout(start);
+      if (id) window.clearInterval(id);
     };
-  }, []);
+  }, [text, startDelay, reduce]);
+
+  const done = n >= text.length;
+  const shown = text.slice(0, n);
+  const arrowAt = text.indexOf("→");
 
   return (
-    <section
-      ref={heroRef}
-      id="home"
-      className="relative min-h-screen bg-gradient-to-br from-off-white via-off-white to-gray-100 px-6 pt-32 pb-24 md:pt-40 md:pb-32 flex items-center overflow-hidden"
+    <span aria-label={text}>
+      <span aria-hidden="true">
+        {arrowAt > -1 && n > arrowAt ? (
+          <>
+            {shown.slice(0, arrowAt)}
+            <span className="text-signal">{shown.slice(arrowAt)}</span>
+          </>
+        ) : (
+          shown
+        )}
+        <span className={`ml-0.5 inline-block w-[0.6ch] ${done ? "animate-caret-blink" : ""}`}>▍</span>
+      </span>
+    </span>
+  );
+}
+
+function Name({ text }: { text: string }) {
+  const words = text.split(" ");
+  let idx = 0;
+  return (
+    <h1
+      className={`${outfit.className} text-balance text-center text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.03em] xs:text-5xl sm:text-6xl lg:text-7xl`}
+      aria-label={text}
     >
-      {/* Animated background gradient that follows mouse */}
-      <div
-        className="absolute inset-0 opacity-30 pointer-events-none transition-opacity duration-1000"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 107, 53, 0.15), transparent 50%)`,
-        }}
-      />
-
-      <HeroInfoCard />
-
-      {/* Decorative geometric shapes */}
-      <div className="absolute top-20 right-10 w-32 h-32 border-2 border-black/10 rotate-45 hidden lg:block" />
-      <div className="absolute bottom-32 left-10 w-24 h-24 border-2 border-accent-orange/20 rotate-12 hidden lg:block" />
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid lg:grid-cols-[1.2fr,1fr] gap-12 lg:gap-20 items-center">
-          {/* Left Side - More creative layout */}
-          <div className="space-y-10 animate-fade-in-up">
-            {/* Large Title with creative typography */}
-            <div className="relative">
-              <h1
-                className={`${bebas.className} text-[clamp(3.5rem,9vw,9rem)] font-normal leading-[0.85] tracking-tight text-black mb-4`}
+      {words.map((w, wi) => (
+        <span key={wi} className="inline-block overflow-hidden pb-[0.12em] align-bottom" aria-hidden="true">
+          {w.split("").map((ch) => {
+            const i = idx++;
+            return (
+              <motion.span
+                key={i}
+                className="inline-block"
+                initial={{ y: "110%" }}
+                animate={{ y: "0%" }}
+                transition={{ duration: 0.9, delay: 0.5 + i * 0.025 }}
               >
-                <span className="block transform -rotate-1 inline-block">code</span>
-                <span className="block transform rotate-1 inline-block ml-8">crafted</span>
-                <span className="block transform -rotate-0.5 inline-block ml-4">with</span>
-                <span className="block transform rotate-2 inline-block ml-12 text-accent-orange">purpose</span>
-              </h1>
-              
-              {/* Decorative underline */}
-              <div className="absolute bottom-0 left-0 w-32 h-1 bg-accent-orange transform -rotate-1" />
-            </div>
+                {ch}
+              </motion.span>
+            );
+          })}
+          {wi < words.length - 1 && <span>&nbsp;</span>}
+        </span>
+      ))}
+    </h1>
+  );
+}
 
-            {/* Description with unique styling */}
-            <div className={`${workSans.className} space-y-4 max-w-xl pl-4 border-l-4 border-black/10`}>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light">
-                Transforming complex ideas into elegant digital experiences. 
-                Every line of code tells a story, every interface creates connection.
-              </p>
-              <p className="text-base text-gray-600 italic">
-                Full-stack developer • Problem solver • Creative technologist
-              </p>
-            </div>
+export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const cornerRotate = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
-            {/* Social Media Icons - Overlapping */}
-            <div className="flex items-center pt-4">
-              <a
-                href="https://www.linkedin.com/in/emilio-laurence/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-[4] w-12 h-12 rounded-full bg-white border-2 border-black flex items-center justify-center hover:bg-accent-orange hover:border-accent-orange transition-all duration-300 shadow-sm"
-                title="LinkedIn"
-              >
-                <span className={`${bebas.className} text-xs font-normal`}>
-                  li
-                </span>
-              </a>
-              <a
-                href="mailto:laurencedimalanta@gmail.com"
-                className="relative z-[3] -ml-3 w-12 h-12 rounded-full bg-white border-2 border-black flex items-center justify-center hover:bg-accent-orange hover:border-accent-orange transition-all duration-300 shadow-sm"
-                title="Email"
-              >
-                <span className={`${bebas.className} text-xs font-normal`}>
-                  em
-                </span>
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-[2] -ml-3 w-12 h-12 rounded-full bg-white border-2 border-black flex items-center justify-center hover:bg-accent-orange hover:border-accent-orange transition-all duration-300 shadow-sm"
-                title="GitHub"
-              >
-                <span className={`${bebas.className} text-xs font-normal`}>
-                  gh
-                </span>
-              </a>
-              <a
-                href="#"
-                className="relative z-[1] -ml-3 w-12 h-12 rounded-full bg-white border-2 border-black flex items-center justify-center hover:bg-accent-orange hover:border-accent-orange transition-all duration-300 shadow-sm"
-                title="Portfolio"
-              >
-                <span className={`${bebas.className} text-xs font-normal`}>
-                  pf
-                </span>
-              </a>
-            </div>
-
-            {/* Statistics with unique design */}
-            <div className="grid grid-cols-2 gap-6 pt-8">
-              <div className="animate-fade-in-up-delay-2 p-4 bg-white/50 backdrop-blur-sm border border-black/10 rounded-lg">
-                <div className={`${bebas.className} text-4xl md:text-5xl font-normal text-black mb-1`}>
-                  100%
-                </div>
-                <p className={`${workSans.className} text-xs text-gray-600 leading-tight`}>
-                  Commitment to Quality
-                </p>
-              </div>
-              <div className="animate-fade-in-up-delay-3 p-4 bg-accent-orange/10 border border-accent-orange/20 rounded-lg">
-                <div className={`${bebas.className} text-4xl md:text-5xl font-normal text-black mb-1`}>
-                  100k+
-                </div>
-                <p className={`${workSans.className} text-xs text-gray-600 leading-tight`}>
-                  Lines of code, building solutions
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side - Unique panel design */}
-          <div className="relative animate-fade-in-up-delay-1">
-            {/* Main image container with unique shape */}
-            <div className="relative">
-              {/* Decorative background elements */}
-              <div className="absolute -top-8 -right-8 w-full h-full bg-accent-orange/20 rounded-3xl transform rotate-3 z-0" />
-              <div className="absolute -top-4 -right-4 w-full h-full bg-accent-yellow/30 rounded-3xl transform -rotate-2 z-0" />
-              
-              {/* Main content panel */}
-              <div className="relative bg-gradient-to-br from-accent-orange to-accent-yellow rounded-3xl p-6 md:p-10 aspect-[4/5] overflow-hidden z-10 shadow-2xl">
-                {/* Decorative elements */}
-                <div className="absolute top-6 right-6 w-14 h-14 bg-white/20 rounded-full flex items-center justify-center z-20 backdrop-blur-sm">
-                  <GlobeAltIcon className="w-7 h-7 text-white" />
-                </div>
-
-                {/* Signature text */}
-                <div className="absolute top-8 left-8 z-20">
-                  <p className={`${workSans.className} text-white text-sm font-light italic opacity-90`}>
-                    Laurence Dimalanta
-                  </p>
-                </div>
-
-                {/* Sparkle decoration */}
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
-                  <SparklesIcon className="w-8 h-8 text-white/40" />
-                </div>
-
-                {/* Main image */}
-                <div className="relative w-full h-full mt-8 rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                    <Image
-                      src="https://placehold.co/600x800/FF6B35/FFFFFF?text=Emilio"
-                      alt="Profile"
-                      width={600}
-                      height={800}
-                      className="object-cover rounded-2xl w-full h-full"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-                
-                {/* Decorative corner accent */}
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/5 rounded-tr-full" />
-              </div>
-            </div>
-          </div>
+  return (
+    <section ref={ref} className="relative flex h-[100svh] min-h-[560px] items-center justify-center">
+      {/* socials: kept at top-centre like the original */}
+      <div className="absolute left-1/2 top-3 z-30 -translate-x-1/2">
+        <div className="flex items-center gap-1 rounded-md border border-line bg-surface/80 p-1 backdrop-blur-sm">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={socials.linkedin}
+            aria-label="LinkedIn"
+            className="grid h-10 w-10 place-items-center rounded text-ink-2 transition-colors hover:bg-ink hover:text-black"
+          >
+            <LinkedInIcon className="h-5 w-5" />
+          </a>
+          <a
+            href={`mailto:${socials.email}`}
+            aria-label="Email"
+            className="grid h-10 w-10 place-items-center rounded text-ink-2 transition-colors hover:bg-ink hover:text-black"
+          >
+            <EnvelopeIcon className="h-5 w-5" />
+          </a>
         </div>
       </div>
+
+      {/* corner orbit (desktop), rotates the opposite way while scrolling */}
+      <motion.div
+        style={{ rotate: cornerRotate }}
+        className="pointer-events-none absolute bottom-[-300px] left-[-300px] hidden w-[500px] lg:block"
+      >
+        <OrbitRing
+          delay={0.6}
+          arcs={[
+            { from: -40, to: -10, period: 140, reverse: true },
+            { from: 200, to: 230, period: 90 },
+          ]}
+        />
+      </motion.div>
+
+      {/* main orbit */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_520px_85px_at_50%_48%,transparent_50%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_520px_85px_at_50%_48%,transparent_50%,black_100%)]">
+        <motion.div
+          style={{ rotate, scale, opacity }}
+          className="flex items-center justify-center"
+        >
+          <OrbitRing className="w-[min(82vw,500px)]" />
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 flex w-full flex-col items-center px-5">
+        <div className="relative inline-flex flex-col items-center rounded-2xl bg-black/60 px-6 py-2 shadow-[0_0_40px_20px_#000000] backdrop-blur-[2px]">
+          <Name text={socials.name} />
+          <motion.p
+            className="mt-4 text-center text-lg text-ink-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+          >
+            {socials.title}
+          </motion.p>
+          <p className={`${inconsolata.className} mt-3 h-6 text-center text-sm text-ink-3`}>
+            <Typed text="GET /api/basic → 200 OK" />
+          </p>
+        </div>
+      </div>
+
+      {/* scroll cue */}
+      <motion.a
+        href="#projects"
+        style={{ opacity: cueOpacity }}
+        className={`${inconsolata.className} absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs tracking-[0.2em] text-ink-3`}
+        aria-label="Scroll to projects"
+      >
+        scroll
+        <span className="relative block h-10 w-px overflow-hidden bg-white/15">
+          <motion.span
+            className="absolute left-0 top-0 block h-3 w-px bg-ink"
+            animate={{ y: [-12, 40] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }}
+          />
+        </span>
+      </motion.a>
     </section>
   );
 }

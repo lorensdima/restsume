@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
@@ -7,33 +8,33 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      xs: "420px",
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
-        'off-white': '#FAF9F6',
-        'accent-orange': '#FF6B35',
-        'accent-yellow': '#FFD23F',
-      },
-      fontFamily: {
-        display: ['var(--font-display)', 'sans-serif'],
-        body: ['var(--font-body)', 'sans-serif'],
+        surface: "#0c0c0d",
+        raised: "#151517",
+        line: "rgba(255,255,255,0.14)",
+        "line-strong": "rgba(255,255,255,0.9)",
+        ink: {
+          DEFAULT: "#f4f4f5",
+          2: "#a1a1aa",
+          3: "#71717a",
+        },
+        signal: "#86efac",
       },
       animation: {
         "slower-spin": "slower-spin 80s linear infinite",
         "fast-rotate-animation": "rotate 0.2s ease-in-out alternate infinite",
         "rotate-animation": "rotate 0.6s ease-in-out alternate infinite",
         "slow-rotate-animation": "rotate 1s ease-in-out alternate infinite",
-        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
-        "fade-in-up-delay-1": "fadeInUp 0.6s ease-out 0.1s forwards",
-        "fade-in-up-delay-2": "fadeInUp 0.6s ease-out 0.2s forwards",
-        "fade-in-up-delay-3": "fadeInUp 0.6s ease-out 0.3s forwards",
-        "fade-in-up-delay-4": "fadeInUp 0.6s ease-out 0.4s forwards",
-        "subtle-bounce": "subtle-bounce 2.5s ease-in-out infinite",
+        twinkle: "twinkle 4s ease-in-out infinite",
+        "caret-blink": "caret-blink 1s steps(1) infinite",
+        "status-blink": "status-blink 2.4s ease-in-out infinite",
       },
       keyframes: {
-        "subtle-bounce": {
-          "0%, 100%": { transform: "translateX(-4rem)" },
-          "50%": { transform: "translateX(-3.5rem)" },
-        },
         "slower-spin": {
           "0%": {
             transform: "rotate(0deg)",
@@ -50,15 +51,18 @@ const config: Config = {
             transform: "rotate(90deg)",
           },
         },
-        fadeInUp: {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(30px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
+        twinkle: {
+          "0%, 70%, 100%": { opacity: "1", transform: "scale(1) rotate(45deg)" },
+          "80%": { opacity: "0.3", transform: "scale(0.7) rotate(45deg)" },
+          "90%": { opacity: "1", transform: "scale(1.25) rotate(45deg)" },
+        },
+        "caret-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
+        },
+        "status-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.35" },
         },
       },
       backgroundImage: {

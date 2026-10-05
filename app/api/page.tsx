@@ -1,73 +1,85 @@
 import Link from "next/link";
 import { fetchHelp } from "../lib/data";
+import { inconsolata, outfit } from "../ui/fonts";
+import { endpoints } from "../lib/content";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const help = await fetchHelp();
+  let help: { name: string; endpoint: string; description: string }[] = [];
+  let isFallback = false;
+
+  try {
+    help = await fetchHelp();
+  } catch (err) {
+    isFallback = true;
+    help = endpoints.map((e) => ({
+      name: e.route.replace("/api/", "").toUpperCase(),
+      endpoint: e.route,
+      description: e.note,
+    }));
+  }
 
   return (
-    <div className="p-4 min-h-screen bg-off-white">
-      {help.length === 0 ? (
-        <div className="max-w-2xl mx-auto mt-20 p-8 bg-white border-2 border-black rounded-lg">
-          <h1 className="text-2xl font-bold mb-4">RESTsume API</h1>
-          <p className="text-gray-600 mb-4">
-            The API help data is currently unavailable. This might be due to database connection issues.
-          </p>
-          <p className="text-sm text-gray-500">
-            Available API endpoints:
-          </p>
-          <ul className="list-disc list-inside mt-2 space-y-1 text-sm text-gray-600">
-            <li><code className="bg-gray-100 px-2 py-1 rounded">/api/basic</code> - Basic user information</li>
-            <li><code className="bg-gray-100 px-2 py-1 rounded">/api/projects</code> - Project data</li>
-            <li><code className="bg-gray-100 px-2 py-1 rounded">/api/experience</code> - Work experience</li>
-            <li><code className="bg-gray-100 px-2 py-1 rounded">/api/education</code> - Education history</li>
-          </ul>
+    <div className={`${inconsolata.className} min-h-screen bg-black px-6 py-12 text-ink`}>
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-8 flex items-center justify-between border-b border-line pb-6">
+          <div>
+            <Link
+              href="/"
+              className="text-xs text-ink-3 transition-colors hover:text-ink"
+            >
+              ← back to portfolio
+            </Link>
+            <h1 className={`${outfit.className} mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl`}>
+              RESTsume API Reference
+            </h1>
+            <p className="mt-1 text-sm text-ink-2">
+              All routes return JSON. Base URL: <code className="text-signal">/api</code>
+            </p>
+          </div>
+          <span className="hidden rounded border border-line bg-surface px-3 py-1.5 text-xs text-ink-2 sm:inline-block">
+            HTTP / REST
+          </span>
         </div>
-      ) : (
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th>Name</th>
-              <th>Endpoint/Route</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody className="text-md bg-gray-900 bg-gray-50 dark:bg-gray-800">
-            {help.map((data, index) => {
-              return (
-                <tr key={index} className="border border-gray-700">
-                  <td>
+
+        {isFallback && (
+          <div className="mb-6 rounded-md border border-line bg-surface p-3 text-xs text-ink-3">
+            {"// live DB connection offline; showing documented route snapshot"}
+          </div>
+        )}
+
+        <div className="overflow-x-auto rounded-lg border border-line bg-surface">
+          <table className="w-full text-left text-sm">
+            <thead className="border-b border-line bg-raised text-xs text-ink-3 uppercase tracking-wider">
+              <tr>
+                <th className="px-5 py-3.5 font-medium">Resource</th>
+                <th className="px-5 py-3.5 font-medium">Endpoint</th>
+                <th className="px-5 py-3.5 font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {help.map((data) => (
+                <tr key={data.endpoint} className="transition-colors hover:bg-white/[0.03]">
+                  <td className="px-5 py-4 font-medium text-ink">{data.name}</td>
+                  <td className="px-5 py-4">
                     <Link
                       href={data.endpoint}
                       target="_blank"
-                      className="underline text-blue-400"
+                      className="inline-flex items-center gap-1 text-signal underline underline-offset-4 hover:text-signal/80"
                     >
-                      {data.name}
+                      <span className="rounded bg-signal/10 px-1.5 py-0.5 text-xs text-signal">GET</span>
+                      {data.endpoint}
+                      <span aria-hidden="true" className="text-xs">↗</span>
                     </Link>
                   </td>
-                  <td>{data.endpoint}</td>
-                  <td>{data.description}</td>
+                  <td className="px-5 py-4 text-ink-2">{data.description}</td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
-
-/* 
-
-
-import { NextResponse } from "next/server";
-import { fetchHelp } from "../lib/data";
-
-export async function GET(request: Request) {
-  const help = await fetchHelp();
-  return NextResponse.json(help, { status: 200 });
-}
-
-
-
-
-*/

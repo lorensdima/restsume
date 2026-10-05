@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "tasteful-ui": {
+      "source": "donkeyking01/tasteful-ui-skill",
+      "sourceType": "github",
+      "skillPath": "tasteful-ui/SKILL.md",
+      "computedHash": "c440100e8d299aadbc596723e96086ad6271af7f4bd22ec361a5d3c3dbfb9335"
+    }
+  }
+}
