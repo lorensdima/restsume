@@ -111,42 +111,38 @@ export default function Timeline({
         onToggleJson={() => setJson((v) => !v)}
       />
 
-      <AnimatePresence mode="wait" initial={false}>
-        {json ? (
-          <motion.div
-            key="json"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            className="mt-10 grid gap-6 lg:grid-cols-2"
-          >
-            <JsonView endpoint="/api/experience" />
-            <JsonView endpoint="/api/education" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="designed"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            className="mt-12"
-          >
-            <div ref={lineRef} className="relative ml-1 max-w-3xl space-y-16">
-              {/* track + progress line that draws with scroll */}
-              <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 w-px bg-white/10" />
-              <motion.span
-                aria-hidden="true"
-                style={{ scaleY }}
-                className="absolute bottom-0 left-0 top-0 w-px origin-top bg-ink"
-              />
-              <Group label="work" route="/api/experience" entries={experience} />
-              <Group label="study" route="/api/education" entries={education} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {json ? (
+        <motion.div
+          key="json"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mt-10 grid gap-6 lg:grid-cols-2"
+        >
+          <JsonView endpoint="/api/experience" />
+          <JsonView endpoint="/api/education" />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="designed"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mt-12"
+        >
+          <div ref={lineRef} className="relative ml-1 max-w-3xl space-y-16">
+            {/* track + progress line that draws with scroll */}
+            <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 w-px bg-white/10" />
+            <motion.span
+              aria-hidden="true"
+              style={{ scaleY }}
+              className="absolute bottom-0 left-0 top-0 w-px origin-top bg-ink"
+            />
+            <Group label="work" route="/api/experience" entries={experience} />
+            <Group label="study" route="/api/education" entries={education} />
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 }

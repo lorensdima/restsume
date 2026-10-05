@@ -118,27 +118,24 @@ export default function Projects() {
         onToggleJson={() => setJson((v) => !v)}
       />
 
-      <AnimatePresence mode="wait" initial={false}>
-        {json ? (
-          <motion.div
-            key="json"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            className="mt-10"
-          >
-            <JsonView endpoint="/api/projects" fallback={projects} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="designed"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12"
-          >
+      {json ? (
+        <motion.div
+          key="json"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mt-10"
+        >
+          <JsonView endpoint="/api/projects" fallback={projects} />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="designed"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12"
+        >
             <ol className="lg:col-span-5" aria-label="Project list">
               {projects.map((p, i) => {
                 const active = selected === i;
@@ -226,7 +223,6 @@ export default function Projects() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
     </section>
   );
 }
