@@ -3,27 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 244, 244, 245;
+  --background-rgb: 0, 0, 0;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #f4f4f5;
+  color: #000;
+}
+
+:focus-visible {
+  outline: 2px solid #f4f4f5;
+  outline-offset: 2px;
 }
 
 .text-shadow-sm {
@@ -33,8 +42,48 @@ body {
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
 }
 
+/* Dot grid: replaces /dotted_background.jpg. Dots sit on the
+   intersections of a faint dashed grid, like the original. */
+.dot-grid {
+  background-color: #000;
+  background-image: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.16) 0 2.5px,
+      transparent 3px
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: 32px 32px, 0 0, 0 0;
+}
+
+/* Orbit ring arcs: each arc spins on its own period around the ring centre. */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.orbit-arc {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: orbit var(--orbit-period, 80s) linear infinite;
+  animation-direction: var(--orbit-direction, normal);
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-arc {
+    animation: none;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
